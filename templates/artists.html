@@ -47,7 +47,7 @@
     </thead>
     <tbody>
     {% for row in data %}
-        <tr class={{ "table-active" if row.Id % 2 == 0}}>
+        <tr onclick="goToArtist(this)" class={{ "table-active" if row.Id % 2 == 0}}>
             <td>{{ row.Id }}</td>
             <td>{{ row.Name }}</td>
             <td>{{ row.Nationality }}</td>
@@ -58,5 +58,10 @@
     {% endfor %}
     </tbody>
 </table>
+<script>
+    function goToArtist(selector){
+        document.location.href = '/artist/' + encodeURIComponent(selector.cells[0].innerHTML);
+    }
+</script>
 </body>
 </html>

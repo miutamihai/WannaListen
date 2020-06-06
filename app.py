@@ -71,5 +71,21 @@ def register():
         return render_template('index.html', username=username)
 
 
+@app.route('/artist/<int:artist_id>')
+def artist(artist_id):
+    cursor = conn.cursor()
+    cursor.execute('select Name from WannaListen.dbo.Artists where Id = ?', artist_id)
+    artist_name = cursor.fetchone()[0]
+    return render_template('artist.html', artist_name=artist_name, username=username)
+
+
+@app.route('/melodie/<int:song_id>')
+def song(song_id):
+    cursor = conn.cursor()
+    cursor.execute('select Title from WannaListen.dbo.Songs where Id = ?', song_id)
+    song_title = cursor.fetchone()[0]
+    return render_template('song.html', song_title=song_title, username=username)
+
+
 if __name__ == '__main__':
     app.run()

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <title>Melodie</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">WannaListen</a>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Acasa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('artists') }}">Artisti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('songs') }}">Melodii</a>
+            </li>
+            {% if username == '' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% if username %}
+        <a class="navbar-brand">Bine ai venit, {{ username }}</a>
+    {% endif %}
+</nav>
+<div class="jumbotron">
+    <h1 class="display-3"> {{ song_title }}</h1>
+</div>
+</body>
+</html>
