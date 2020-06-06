@@ -35,6 +35,18 @@
 </nav>
 <div class="jumbotron">
     <h1 class="display-3"> {{ artist_name }}</h1>
+    <div style="height: 300px; overflow-y: scroll">
+        {% for row in data %}
+            <div class="card {{ "text-white bg-primary" if row.Id % 2 == 1 }} {{ "bg-secondary" if row.Id % 2 == 0 }} mb-3"
+                 style="max-width: 100rem;">
+                <div class="card-header">{{ row.DateOfCreation }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ row.GeneratedUserName }}</h4>
+                    <p class="card-text">{{ row.Content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 </body>
 </html>
