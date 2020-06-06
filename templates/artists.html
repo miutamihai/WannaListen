@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artisti</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">WannaListen</a>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Acasa</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('artists') }}">Artisti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('songs') }}">Melodii</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h1>Acestia sunt artistii aflati in baza noastra de date</h1>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Nr</th>
+        <th scope="col">Nume</th>
+        <th scope="col">Nationalitate</th>
+        <th scope="col">Oras de origine</th>
+        <th scope="col">Data nasterii</th>
+        <th scope="col">Anul lansarii</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in data %}
+        <tr class={{ "table-active" if row.Id % 2 == 0}}>
+            <td>{{ row.Id }}</td>
+            <td>{{ row.Name }}</td>
+            <td>{{ row.Nationality }}</td>
+            <td>{{ row.CityOfBirth }}</td>
+            <td>{{ row.DateOfBirth }}</td>
+            <td>{{ row.YearOfLaunch }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
