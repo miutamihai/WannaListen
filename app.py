@@ -43,8 +43,6 @@ def login():
         global username
         username = request.form['username']
         password = request.form['password']
-        print(username)
-        print(password)
         cursor.execute('select WannaListen.dbo.LoginUser(?, ?)', (username, password))
         res = cursor.fetchone()
         print(res)
@@ -54,9 +52,21 @@ def login():
             return 'Failure'
 
 
-@app.route('/inregistrare')
+@app.route('/inregistrare', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        cursor = conn.cursor()
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        password = request.form['password']
+        cursor.execute('exec WannaListen.dbo.RegisterUser ?, ?, ?', (first_name, last_name, password))
+        conn.commit()
+        cursor.execute('SELECT TOP 1 GeneratedUserName FROM WannaListen.dbo.Users ORDER BY Id DESC')
+        global username
+        username = cursor.fetchone()[0]
+        return render_template('index.html', username=username)
 
 
 if __name__ == '__main__':
