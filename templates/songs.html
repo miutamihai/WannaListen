@@ -20,12 +20,12 @@
                 <a class="nav-link" href="{{ url_for('songs') }}">Melodii</a>
             </li>
             {% if username == '' %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
+                </li>
             {% endif %}
         </ul>
     </div>
@@ -41,21 +41,23 @@
         <th scope="col">Titlu</th>
         <th scope="col">Artist</th>
         <th scope="col">Anul lansarii</th>
+        <th scope="col">Numer de comentarii</th>
     </tr>
     </thead>
     <tbody>
     {% for row in data %}
-        <tr onclick="goToSong(this)" class={{ "table-active" if row.Id % 2 == 0}}>
+        <tr onclick="goToSong(this)" class={{ "table-active" if row.Id % 2 == 0 }}>
             <td>{{ row.Id }}</td>
             <td>{{ row.Title }}</td>
             <td>{{ row.Name }}</td>
             <td>{{ row.YearOfLaunch }}</td>
+            <td>{{ row.NumberOfComments }}</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 <script>
-    function goToSong(selector){
+    function goToSong(selector) {
         document.location.href = '/melodie/' + encodeURIComponent(selector.cells[0].innerHTML);
     }
 </script>

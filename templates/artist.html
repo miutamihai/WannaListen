@@ -47,6 +47,18 @@
             </div>
         {% endfor %}
     </div>
+    {% if username != '' %}
+        <form method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label for="comment">Adauga un comentariu</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="5"
+                              placeholder="Comentariu..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Posteaza</button>
+            </fieldset>
+        </form>
+    {% endif %}
 </div>
 </body>
 </html>
