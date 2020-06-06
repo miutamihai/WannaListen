@@ -19,14 +19,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url_for('songs') }}">Melodii</a>
             </li>
+            {% if username == '' %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
             </li>
+            {% endif %}
         </ul>
     </div>
+    {% if username %}
+        <a class="navbar-brand">Bine ai venit, {{ username }}</a>
+    {% endif %}
 </nav>
 <h1>Acestea sunt melodiile aflate in baza noastra de date</h1>
 <table class="table table-hover">

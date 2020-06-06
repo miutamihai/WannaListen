@@ -19,15 +19,51 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('songs') }}">Melodii</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
-            </li>
+            {% if username == '' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}">Autentificare</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}">Inregistrare</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
+    {% if username %}
+        <a class="navbar-brand">Bine ai venit, {{ username }}</a>
+    {% endif %}
 </nav>
-
+<div class="jumbotron">
+    <h1 class="display-3">Salutare!</h1>
+    <p class="lead">WannaListen este mediul perfect pentru a vedea opinii legate de industria muzicala sau pentru a o
+        impartasi pe a ta.</p>
+    <hr class="my-4">
+    {% if username == '' %}
+        <p>Pentru utilizarea tuturor functionalitatilor serviciului WannaListen, recomandam autentificarea sau, daca nu
+            ai
+            deja cont, inregistrarea.</p>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <p class="lead">
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Autentificare</a>
+                    </p>
+                </td>
+                <td>
+                    <p class="lead" style="padding: 0 65px">
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}"
+                           role="button">Inregistrare</a>
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('logout') }}" role="button">Iesi din cont</a>
+        </p>
+    {% endif %}
+</div>
 </body>
 </html>
