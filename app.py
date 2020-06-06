@@ -13,28 +13,29 @@ def index():
     return render_template('index.html', username=username)
 
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     global username
     username = ''
     return render_template('index.html', username=username)
 
 
-@app.route('/artisti')
+@app.route('/artisti/')
 def artists():
+    print('Artists')
     cursor = conn.cursor()
     cursor.execute('select Id, Name, Nationality, CityOfBirth, DateOfBirth, YearOfLaunch from WannaListen.dbo.Artists')
     return render_template('artists.html', data=cursor, username=username)
 
 
-@app.route('/melodii')
+@app.route('/melodii/')
 def songs():
     cursor = conn.cursor()
     cursor.execute('exec WannaListen.dbo.GetSongsWithArtistName')
     return render_template('songs.html', data=cursor, username=username)
 
 
-@app.route('/autentificare', methods=['GET', 'POST'])
+@app.route('/autentificare/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
@@ -49,10 +50,11 @@ def login():
         if res[0]:
             return render_template('index.html', username=username)
         else:
-            return 'Failure'
+            username = ''
+            return render_template('failed_login.html')
 
 
-@app.route('/inregistrare', methods=['GET', 'POST'])
+@app.route('/inregistrare/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
         return render_template('register.html')
